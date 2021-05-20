@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <title>Vaccine Tracker</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .header {
+      margin:10px;
+      padding: 10px;
+      text-align: center;
+      background: #6699ff;
+      width:100%;
+      font-size: 15px;
+    }
+    .vertical-menu {
+      width: 200px;
+    }
+
+    .vertical-menu p {
+      background-color: #eee;
+      color: black;
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+    }
+
+    .vertical-menu p:hover {
+      background-color: #ccc;
+    }
+
+    .vertical-menu p.active {
+      background-color: #3936bb;
+      color: white;
+    }
+    .show-data {
+      width: 200px;
+    }
+
+    .show-data p {
+      background-color: #eee;
+      color: black;
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+    }
+
+    .show-data p:hover {
+      background-color: #ccc;
+    }
+
+    .show-data p.active {
+      background-color: #3936bb;
+      color: white;
+    }
+    #overflowTest {
+        background: #6699ff;
+        color: white;
+        padding: 15px;
+        width: 100%;
+        height: 400px;
+        overflow: scroll;
+        border: 1px solid #ccc;
+      }
+     #overflowTest2 {
+        background: #6699ff;
+        color: white;
+        padding: 15px;
+        width: 100%;
+        height: 400px;
+        overflow: scroll;
+        border: 1px solid #ccc;
+      }
+     .show-data1 {
+      width: 200px;
+    }
+
+    .show-data1 p {
+      background-color: #eee;
+      color: black;
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+    }
+
+    .show-data1 p:hover {
+      background-color: #ccc;
+    }
+
+    .show-data1 p.active {
+      background-color: #3936bb;
+      color: white;
+    }
+    #overflowTest3 {
+        background: #6699ff;
+        color: white;
+        padding: 15px;
+        width: 100%;
+        height: 400px;
+        overflow: scroll;
+        border: 1px solid #ccc;
+      }
+    p{
+        font-weight: bold;
+        text-align: center;
+    }
+    input[type=text] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+    .registerbtn {
+      background-color: #00b300;
+      color: white;
+      padding: 16px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+    .registerbtn2 {
+      background-color: #00b300;
+      color: white;
+      padding: 16px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+</style>
+<script>
+
+function myFunction() {
+var text1= $('#text1').val();
+
+  $.ajax({
+              url: "/join",
+              type: "POST",
+              data: {text1:text1}
+
+          }).done(function(response) {
+
+            var html= "<p>Name : Address : Fee type : Vaccine name : Slots</p>";
+
+            response =response.result;
+                 $.each(response,function(key,val){
+                 console.log(val[0],val[1],val[2]);
+                 var obj = val[0];
+                 var obj2 = val[1];
+                 var obj3=val[2];
+                 var obj4 = val[3];
+                 var obj5= val[4];
+                 for(var i=0; i<obj.length; i++) {
+                    html+="<p>"+obj[i]+" : "+obj2[i]+" : "+obj3[i]+" : "+obj4[i]+" : "+obj5[i]+"</p>"
+                  }
+
+                });
+                html +="";
+                $(".show-data1").append(html);
+            });
+};
+function myFunction2() {
+var text1= $('#state').val();
+
+  $.ajax({
+              url: "/state",
+              type: "POST",
+              data: {text1:text1}
+
+          }).done(function(response) {
+
+            var html= "<br><br><br><p>  District ID : District <p>";
+
+            response =response.result;
+                 $.each(response,function(key,val){
+                 console.log(val);
+                 var obj = val;
+                 for(var key in obj) {
+                    html+="<p>"+key+ ": "+obj[key]+"<p>"
+                    }
+
+                });
+                html +="<br>";
+                $(".show-data").append(html);
+            });
+};
+
+  </script>
+<body>
+<div class="header">
+  <h1>Vaccine Tracker</h1>
+  <p>Find where are the vaccines Available in your AREA</p>
+</div>
+<div class="vertical-menu" id="overflowTest">
+    <p >State id    :       States</p>
+   <p> 1:   Andaman and Nicobar Islands</p>
+ <p>2 :   Andhra Pradesh</p>
+  <p>3 :  Arunachal Pradesh</p>
+  <p>4 : Assam</p>
+  <p>5 :  Bihar</p>
+   <p>6 :  Chandigarh</p>
+   <p>  7 :  Chhattisgarh</p>
+    <p>   8 :  Dadra and Nagar Haveli</p>
+    <p>   37 :  Daman and Diu</p>
+    <p>   9  : Delhi</p>
+    <p>    10  : Goa</p>
+    <p>    11  : Gujarat</p>
+    <p>    12  : Haryana</p>
+    <p>    13  : Himachal Pradesh</p>
+    <p>    14  : Jammu and Kashmir</p>
+    <p>    15  : Jharkhand</p>
+    <p>   16  : Karnataka</p>
+    <p>    17  : Kerala</p>
+    <p>   18  : Ladakh</p>
+    <p>   19  : Lakshadweep</p>
+    <p>   20  : Madhya Pradesh</p>
+    <p>   21  : Maharashtra</p>
+    <p>   22  : Manipur</p>
+    <p>    23  : Meghalaya</p>
+    <p>   24  : Mizoram</p>
+    <p>   25  : Nagaland</p>
+    <p>   26  : Odisha</p>
+    <p>   27  : Puducherry</p>
+    <p>   28  : Punjab</p>
+    <p>  29  : Rajasthan</p>
+   <p>    30  : Sikkim</p>
+    <p>   31  : Tamil Nadu</p>
+    <p>   32  : Telangana</p>
+    <p>   33  : Tripura</p>
+    <p>   34  : Uttar Pradesh</p>
+    <p>   35  : Uttarakhand</p>
+    <p>36 :  West Bengal</p>
+</div>
+            <p >State id: </p><input type="text" placeholder="For tamilnadu : 31" id="state"><br><br>
+            <button id="clicked2" class="registerbtn" onclick="myFunction2()">Submit</button><br><br>
+            <div class="alert alert-success">
+                <strong>Results</strong> will Display HERE
+            </div>
+            <div class="show-data" id="overflowTest2"></div>
+            <p>District id: </p><input type="text" placeholder="For tirupur: 568" id="text1" name="text1"><br><br>
+            <button id="clicked" class="registerbtn2" onclick="myFunction()">Submit</button><br><br>
+            <div class="alert alert-success">
+                <strong>Results</strong> will Display HERE
+            </div>
+            <div class="show-data1" id="overflowTest3">
+
+            </div>
+        </p>
+
+
+    </div>
+</body>
+</html>
