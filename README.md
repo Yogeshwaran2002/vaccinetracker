@@ -20,7 +20,7 @@ urllib3==1.26.4
 Werkzeug==1.0.1
 
 After installing requirements in your pc run this command :
-cd cowintrack-main 
+cd vaccinetracker-main 
 set FLASK_APP = api.py
 flask run
 
